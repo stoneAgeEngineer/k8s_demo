@@ -1,0 +1,22 @@
+apiVersion: apps/v1        ## ReplicaSet lives in the "apps" API group, not core v1
+kind: ReplicaSet           ## the object type the controller-manager will watch
+metadata:
+  name: nginx-replicaset   ## name of the ReplicaSet object itself
+spec:                      ## desired state of the ReplicaSet
+  replicas: 3              ## the number the controller compares reality against
+## OUT of hundreads of pods runing . Kubernetes uses the lable to find that pods with lable added below. Selector and template lable should match for it to find  
+#the pods
+  selector:                
+    matchLabels:
+      app: nginx           ## "any pod with label app=nginx is mine"
+## template used to create pods
+  template:                
+    metadata:
+      labels: 
+        app: nginx         ## must MATCH the selector above, or the API rejects it
+    spec:                  ## everything below here is an ordinary Pod spec
+      containers:
+        - name: nginx
+          image: nginx:latest
+          ports: 
+          - containerPort: 80
