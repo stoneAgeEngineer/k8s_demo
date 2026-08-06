@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-with-namespace
+  namespace: backend-team
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx-with-namespace
+  template:
+    metadata:
+      labels:
+        app: nginx-with-namespace
+    spec:
+      containers:
+        - name: nginx-with-namespace
+          image: nginx:latest
+          ports:
+            - containerPort: 80
+
+
+
+## k apply -f deployment-with-namespace.yml 
+#
+
