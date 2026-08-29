@@ -14,7 +14,7 @@ data:
         server_name k8s-backend.100xdevs.com;
         
         location / {
-          proxy_pass http://backend.default.svc.cluster.local:3000; ## syntax is nameOfPod.namespace.service.cluster.host 
+          proxy_pass http://backend.default.svc.cluster.local:3000; ## syntax is nameOfService.namespace.service.cluster.host 
           proxy_http_version 1.1;
           proxy_set_header Upgrade $http_upgrade;
           proxy_set_header Connection 'upgrade';
